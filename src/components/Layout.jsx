@@ -35,14 +35,6 @@ export default function Layout({ children }) {
           </Link>
 
           <div className="flex items-center gap-4">
-            <button
-              onClick={toggle}
-              className="hidden md:block text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-lg cursor-pointer"
-              title={dark ? '☀️' : '🌙'}
-            >
-              {dark ? '☀️' : '🌙'}
-            </button>
-
             {isAuthenticated && (
               <div className="relative hidden md:block">
                 <button

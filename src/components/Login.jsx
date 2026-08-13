@@ -31,7 +31,11 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm space-y-4"
       >
+        <div className='flex flex-col gap-4'>
+          <img src="/favicon.svg" alt="Presupuesto Logo" className='h-14' />
         <h1 className="text-2xl font-bold text-center text-blue-600 dark:text-blue-400">Iniciar sesion</h1>
+
+        </div>
 
         {error && (
           <div className="bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm p-2 rounded">{error}</div>
