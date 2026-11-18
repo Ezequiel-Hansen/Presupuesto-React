@@ -56,6 +56,8 @@ export default function BudgetCard({ budget, editable }) {
         <div className="border-t border-gray-200 dark:border-gray-700 px-4 py-4 space-y-4">
           {isLoadingBudget ? (
             <p className="text-gray-400 dark:text-gray-500 text-sm">Cargando items...</p>
+          ) : isErrorBudget ? (
+            <p className="text-red-500 dark:text-red-400 text-sm">Error al cargar los items del presupuesto.</p>
           ) : (
             <>
               <BudgetTable items={items} editable={editable} budgetId={budget.id} />
