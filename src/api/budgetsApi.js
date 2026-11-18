@@ -44,7 +44,7 @@ export async function getById(id) {
     .from('budgets')
     .select('id, name, created_at, items(id, title, price)')
     .eq('id', id)
-    .order('id', { ascending: true, foreignTable: 'items' })
+    .order('created_at', { ascending: false, foreignTable: 'items' })
     .single();
 
   if (error) throw error;
