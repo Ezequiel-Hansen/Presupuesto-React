@@ -49,6 +49,13 @@ export function useDeleteItem(budgetId) {
   });
 }
 
+export function useUpdateItem(budgetId) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ itemId, title, price }) => budgetsApi.updateItem(budgetId, itemId, title, price),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['budgets'] }),
+  });
+}
 
 
 

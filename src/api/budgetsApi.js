@@ -88,6 +88,16 @@ export async function addItem(budgetId, title, price) {
   return data;
 }
 
+export async function updateItem(budgetId, itemId, title, price) {
+  const { error } = await supabase
+    .from('items')
+    .update({ title, price })
+    .eq('id', itemId)
+    .eq('budget_id', budgetId);
+
+  if (error) throw error;
+}
+
 export async function deleteItem(budgetId, itemId) {
   const { error } = await supabase
     .from('items')
