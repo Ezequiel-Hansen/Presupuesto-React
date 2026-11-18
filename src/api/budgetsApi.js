@@ -6,6 +6,10 @@ function mapBudget(row) {
     name: row.name,
     createdAt: row.created_at,
     total: (row.items ?? []).reduce((sum, i) => sum + Number(i.price), 0),
+    items: (row.items ?? []).map((i) => ({
+      title: i.title,
+      price: Number(i.price),
+    })),
   };
 }
 
@@ -25,7 +29,7 @@ function mapBudgetDetail(row) {
 export async function getAll(year) {
   let query = supabase
     .from('budgets')
-    .select('id, name, created_at, items(price)')
+    .select('id, name, created_at, items(title, price)')
     .order('created_at', { ascending: false });
 
   if (year) {

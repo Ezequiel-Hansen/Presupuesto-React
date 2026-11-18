@@ -37,7 +37,7 @@ export function useAddItem(budgetId) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ title, price }) => budgetsApi.addItem(budgetId, title, price),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['budgets', budgetId] }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['budgets'] }),
   });
 }
 
@@ -45,7 +45,7 @@ export function useDeleteItem(budgetId) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (itemId) => budgetsApi.deleteItem(budgetId, itemId),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['budgets', budgetId] }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['budgets'] }),
   });
 }
 

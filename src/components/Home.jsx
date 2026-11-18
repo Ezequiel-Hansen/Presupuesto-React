@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useBudgets } from '../hooks/useBudgets';
 import useAuth from '../hooks/useAuth';
 import BudgetCard from './BudgetCard';
+import Metric from './Metric';
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
@@ -28,26 +29,31 @@ export default function Home() {
         </button>
       </div>
 
-      {isLoading ? (
-        <p className="text-gray-500 dark:text-gray-400">Cargando presupuestos...</p>
-      ) : error ? (
-        <p className="text-red-500 dark:text-red-400">Error al cargar presupuestos</p>
-      ) : budgets && budgets.length > 0 ? (
-        <div className="space-y-3">
-          {budgets.map((b) => (
-            <BudgetCard key={b.id} budget={b} editable={isAuthenticated} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-16 space-y-4">
-          <p className="text-gray-500 dark:text-gray-400 text-lg">
-            {isAuthenticated ? 'No hay presupuestos aun. Crea uno nuevo.' : 'Bienvenido a tu gestor de presupuestos'}
-          </p>
-          {!isAuthenticated && (
-            <p className="text-gray-400 dark:text-gray-500">Inicia sesion para crear y administrar tus presupuestos</p>
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem] gap-6 items-start">
+        <section aria-label="Historial de presupuestos">
+          {isLoading ? (
+            <p className="text-gray-500 dark:text-gray-400">Cargando presupuestos...</p>
+          ) : error ? (
+            <p className="text-red-500 dark:text-red-400">Error al cargar presupuestos</p>
+          ) : budgets && budgets.length > 0 ? (
+            <div className="space-y-3">
+              {budgets.map((b) => (
+                <BudgetCard key={b.id} budget={b} editable={isAuthenticated} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16 space-y-4">
+              <p className="text-gray-500 dark:text-gray-400 text-lg">
+                {isAuthenticated ? 'No hay presupuestos aun. Crea uno nuevo.' : 'Bienvenido a tu gestor de presupuestos'}
+              </p>
+              {!isAuthenticated && (
+                <p className="text-gray-400 dark:text-gray-500">Inicia sesion para crear y administrar tus presupuestos</p>
+              )}
+            </div>
           )}
-        </div>
-      )}
+        </section>
+        <Metric budgets={budgets ?? []} isLoading={isLoading} hasError={Boolean(error)} />
+      </div>
     </div>
   );
 }
